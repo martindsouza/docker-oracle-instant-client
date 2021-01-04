@@ -11,3 +11,7 @@ docker build \
   .
 
 ```
+
+
+## Using the Oracle Wallet
+If connecting to the Oracle Cloud you'll need to provide a `TNS_ADMIN`. See the [docker sqlcl](https://github.com/martindsouza/docker-oracle-sqlcl#oracle-wallet--oracle-oci-atp) documentation about how to set the `TNS_ADMIN` (it's the same steps for `sqlplus`)
