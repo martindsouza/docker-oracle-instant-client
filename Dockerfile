@@ -69,11 +69,22 @@ FROM oraclelinux:7-slim
 ARG release=19
 ARG update=9
 
+ENV TZ="GMT" \
+  SQLPATH="/oracle/" \
+  # #1: Required for expdp
+  PATH="/usr/lib/oracle/${release}.${update}/client64/bin:$PATH:${PATH}" \
+  LD_LIBRARY_PATH="/usr/lib/oracle/${release}.${update}/client64/lib"
+
+
 RUN  yum -y install oracle-release-el7 && yum-config-manager --enable ol7_oracle_instantclient && \
-     yum -y install oracle-instantclient${release}.${update}-basic oracle-instantclient${release}.${update}-devel oracle-instantclient${release}.${update}-sqlplus && \
+     yum -y install oracle-instantclient${release}.${update}-basic oracle-instantclient${release}.${update}-devel oracle-instantclient${release}.${update}-sqlplus oracle-instantclient${release}.${update}-tools && \
      rm -rf /var/cache/yum
 
 COPY ["scripts/*", "/tmp/"]
+
+VOLUME ["/sqlplus","/oracle"]
+WORKDIR "/sqlplus"
+
 ENTRYPOINT ["/tmp/start-container.sh"]
 CMD ["/nolog"]
 
