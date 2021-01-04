@@ -6,10 +6,9 @@
 ```bash
 # Build the image
 docker build \
-  -t oracle-instantclient:19.5.0 \
+  -t oracle-instantclient:19.9.0 \
   -t oracle-instantclient:latest \
   .
-
 ```
 
 
